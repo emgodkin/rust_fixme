@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["main",""]],"struct":[["City","City struct contains name, latitude, and longitude"],["Color","Remove debug in order to allow for impl Display Color contains red, green, and blue"]]};
