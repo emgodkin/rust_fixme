@@ -1,7 +1,7 @@
 use std::fmt::{self, Formatter, Display};
 
 /* Demonstrates printing of a user defined struct using println! macro.*/
-
+///City struct contains name, latitude, and longitude
 struct City {
     name: &'static str,
     // Latitude
@@ -9,27 +9,37 @@ struct City {
     // Longitude
     lon: f32,
 }
-
+///Display for city helps to set up the formatting process
 impl Display for City {
     // `f` is a buffer, this method must write the formatted string into it
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        ///Checking latitude for North or South
         let lat_c = if self.lat >= 0.0 { 'N' } else { 'S' };
+        ///Checking Longitude for East or West
         let lon_c = if self.lon >= 0.0 { 'E' } else { 'W' };
 
         // `write!` is like `format!`, but it will write the formatted string into a buffer (the first argument)
+        ///Writing out the information in the proper format
         write!(f, "{}: {:.3}°{} {:.3}°{}",
                self.name, self.lat.abs(), lat_c, self.lon.abs(), lon_c)
     }
 }
-
-#[derive(Debug)]
+///Remove debug in order to allow for impl Display
+//#[derive(Debug)]
+///Color contains red, green, and blue
 struct Color {
     red: u8,
     green: u8,
     blue: u8,
 }
-
+///Allows for proper formatting of colors
+impl Display for Color {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        write!(f, "red: {},green: {},blue: {}",self.red,self.green,self.blue)
+    }
+}
 fn main() {
+    ///Runs through each city within City 
     for city in [
         City { name: "Glassboro", lat: 39.702892, lon: -75.111839 },
         City { name: "Mullica Hill", lat: 39.73928, lon: -75.224072 },
@@ -37,13 +47,13 @@ fn main() {
     ].iter() {
         println!("{}", *city);
     }
-
+    ///Runs through each color within Color
     for color in [
         Color { red: 128, green: 255, blue: 90 },
         Color { red: 0, green: 3, blue: 254 },
         Color { red: 0, green: 0, blue: 0 },
     ].iter() {
         // Hint : Fix the code so you can print it using {}
-        println!("{:?}", *color);
+        println!("{}",*color);
     }
 }
